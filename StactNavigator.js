@@ -14,6 +14,10 @@ import MessagesScreen from "./screens/MessageScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import SavedScreen from "./screens/SavedScreen";
+import PaymentScreen from "./screens/PaymentScreen";
+import MyListingsScreen from "./screens/MyListingsScreen";
+import EditListing from "./screens/EditListing";
+
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
   const Stack = createNativeStackNavigator();
@@ -104,22 +108,36 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Details"
           component={DetailsScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: true }}
         />
         <Stack.Screen
           name="CreateListing"
-          component={CreateListingScreen} // Add the new screen here
-          options={{ headerShown: false, title: "Create Listing" }}
+          component={CreateListingScreen}
+          options={{ headerShown: true, title: "Create Listing" }}
         />
         <Stack.Screen
           name="ChatList"
           component={ChatListScreen}
-          options={{ title: "Chats" }}
+          options={{ headerShown: true, title: "Chats" }}
         />
         <Stack.Screen
           name="Messages"
           component={MessagesScreen}
           options={{ title: "Chat" }}
+        />
+        <Stack.Screen
+          name="Payment"
+          component={PaymentScreen}
+          options={{ title: "Receipt" }}
+        />
+        <Stack.Screen
+          name="MyListings"
+          component={MyListingsScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen name="EditListing" 
+        component={EditListing} 
+        options={{ headerShown: true }}
         />
       </Stack.Navigator>
     </NavigationContainer>

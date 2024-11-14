@@ -118,7 +118,7 @@ const LoginScreen = () => {
           <View style={styles.divider} />
         </View>
 
-        {/* Google Login */}
+        
         {/*<Pressable onPress={handleGoogleSignIn} style={styles.googleButton}>
           <Ionicons name="logo-google" size={24} color="black" />
           <Text style={styles.googleButtonText}>Continue with Google</Text>

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
-import * as Crypto from 'expo-crypto'; // <-- Import expo-crypto for generating unique IDs
-import * as ImagePicker from 'expo-image-picker';
+import * as Crypto from "expo-crypto"; // <-- Import expo-crypto for generating unique IDs
+import * as ImagePicker from "expo-image-picker";
 import { signOut } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -45,7 +45,9 @@ const ProfileScreen = () => {
           if (userDoc.exists()) {
             const data = userDoc.data();
             if (data.profileImage) {
-              const imageUrl = await getDownloadURL(ref(storage, data.profileImage));
+              const imageUrl = await getDownloadURL(
+                ref(storage, data.profileImage)
+              );
               data.profileImage = imageUrl;
             }
             setUserData(data);
@@ -71,7 +73,8 @@ const ProfileScreen = () => {
   };
 
   const pickImage = async () => {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
       Alert.alert("Permission to access camera roll is required!");
@@ -86,7 +89,7 @@ const ProfileScreen = () => {
     });
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri); 
+      setImage(result.assets[0].uri);
     }
   };
 
@@ -106,7 +109,10 @@ const ProfileScreen = () => {
         new Date().toString()
       );
 
-      const imgRef = ref(storage, `profilePictures/${auth.currentUser.uid}/${uniqueId}`);
+      const imgRef = ref(
+        storage,
+        `profilePictures/${auth.currentUser.uid}/${uniqueId}`
+      );
       const uploadTask = uploadBytesResumable(imgRef, blob);
 
       setUploading(true);
@@ -114,7 +120,8 @@ const ProfileScreen = () => {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          const progressValue = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          const progressValue =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setUploadProgress(progressValue);
         },
         (error) => {
@@ -157,7 +164,10 @@ const ProfileScreen = () => {
         });
 
         setIsEditable(false);
-        Alert.alert("Profile Updated", "Your profile information has been successfully updated.");
+        Alert.alert(
+          "Profile Updated",
+          "Your profile information has been successfully updated."
+        );
       } catch (error) {
         console.error("Error updating user data:", error);
       }
@@ -178,10 +188,7 @@ const ProfileScreen = () => {
                 />
               ) : (
                 image && (
-                  <Image
-                    source={{ uri: image }}
-                    style={styles.profileImage}
-                  />
+                  <Image source={{ uri: image }} style={styles.profileImage} />
                 )
               )}
 
@@ -189,13 +196,19 @@ const ProfileScreen = () => {
                 <Text style={styles.buttonText}>Upload Profile Picture</Text>
               </Pressable>
 
-              {uploading && <Text style={styles.uploadProgressText}>Uploading... {Math.round(uploadProgress)}%</Text>}
+              {uploading && (
+                <Text style={styles.uploadProgressText}>
+                  Uploading... {Math.round(uploadProgress)}%
+                </Text>
+              )}
 
               <Text style={styles.label}>First Name</Text>
               <TextInput
                 style={styles.input}
                 value={userData.firstName}
-                onChangeText={(text) => setUserData({ ...userData, firstName: text })}
+                onChangeText={(text) =>
+                  setUserData({ ...userData, firstName: text })
+                }
                 placeholder="First Name"
                 editable={isEditable}
               />
@@ -204,7 +217,9 @@ const ProfileScreen = () => {
               <TextInput
                 style={styles.input}
                 value={userData.lastName}
-                onChangeText={(text) => setUserData({ ...userData, lastName: text })}
+                onChangeText={(text) =>
+                  setUserData({ ...userData, lastName: text })
+                }
                 placeholder="Last Name"
                 editable={isEditable}
               />
@@ -222,7 +237,9 @@ const ProfileScreen = () => {
               <TextInput
                 style={styles.input}
                 value={userData.phone}
-                onChangeText={(text) => setUserData({ ...userData, phone: text })}
+                onChangeText={(text) =>
+                  setUserData({ ...userData, phone: text })
+                }
                 placeholder="Phone Number"
                 editable={isEditable}
               />
@@ -239,7 +256,9 @@ const ProfileScreen = () => {
               <Text style={styles.text}>Email: {userData.email}</Text>
 
               <Pressable
-                onPress={() => (isEditable ? handleEditSave() : setIsEditable(true))}
+                onPress={() =>
+                  isEditable ? handleEditSave() : setIsEditable(true)
+                }
                 style={styles.button}
               >
                 <Text style={styles.buttonText}>
@@ -247,6 +266,12 @@ const ProfileScreen = () => {
                 </Text>
               </Pressable>
 
+              <Pressable
+                onPress={() => navigation.navigate("MyListings")}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>MyListings</Text>
+              </Pressable>
               <Pressable onPress={handleSignOut} style={styles.signOutButton}>
                 <Text style={styles.buttonText}>Sign Out</Text>
               </Pressable>
@@ -343,5 +368,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
 export default ProfileScreen;

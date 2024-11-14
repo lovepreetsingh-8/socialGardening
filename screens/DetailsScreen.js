@@ -16,18 +16,18 @@ const DetailsScreen = ({ route }) => {
   const { item } = route.params;
   const navigation = useNavigation();
   const currentUserEmail = auth.currentUser?.email;
-
+ 
   // Generate a unique chat ID based on both participants' emails
   const generateChatId = (email1, email2) => [email1, email2].sort().join(":");
-
+ 
   // Check if chat already exists; create if not
   const handleMessageOwner = async () => {
     const chatId = generateChatId(currentUserEmail, item.host_email);
-
+ 
     try {
       const chatDoc = doc(db, "messages", chatId);
       const chatSnapshot = await getDoc(chatDoc);
-
+ 
       if (!chatSnapshot.exists()) {
         await setDoc(chatDoc, {
           participants: [currentUserEmail, item.host_email],
@@ -35,7 +35,7 @@ const DetailsScreen = ({ route }) => {
           createdAt: Timestamp.fromDate(new Date()),
         });
       }
-
+ 
       // Navigate to Messages screen with relevant chat details
       navigation.navigate("Messages", {
         chatId,
@@ -83,10 +83,10 @@ const DetailsScreen = ({ route }) => {
               <Text style={styles.hostContact}>Contact: {item.host_email}</Text>
             </View>
           </View>
-
+ 
           {/* Description */}
           <Text style={styles.description}>{item.description}</Text>
-
+ 
           {/* Additional details */}
           <View style={styles.detailsContainer}>
             <Text style={styles.detailLabel}>Amenities:</Text>
@@ -96,27 +96,27 @@ const DetailsScreen = ({ route }) => {
                 : item.amenities}
             </Text>
           </View>
-
+ 
           <View style={styles.detailsContainer}>
             <Text style={styles.detailLabel}>Availability:</Text>
             <Text style={styles.detailValue}>{item.availability}</Text>
           </View>
-
+ 
           <View style={styles.detailsContainer}>
             <Text style={styles.detailLabel}>Soil Type:</Text>
             <Text style={styles.detailValue}>{item.soil_type}</Text>
           </View>
-
+ 
           <View style={styles.detailsContainer}>
             <Text style={styles.detailLabel}>Sunlight Exposure:</Text>
             <Text style={styles.detailValue}>{item.sunlight_exposure}</Text>
           </View>
-
+ 
           <View style={[styles.detailsContainer, { marginBottom: 30 }]}>
             <Text style={styles.detailLabel}>Tools Included:</Text>
             <Text style={styles.detailValue}>{item.tools_included}</Text>
           </View>
-
+ 
           <TouchableOpacity
             style={styles.messageButton}
             onPress={handleMessageOwner}
@@ -126,19 +126,19 @@ const DetailsScreen = ({ route }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
+ 
       {/* Footer with price and Reserve button */}
       <View style={styles.footer}>
         <Text style={styles.price}>€{item.price} / Duration</Text>
-        <TouchableOpacity style={styles.reserveButton}>
+        <TouchableOpacity style={styles.reserveButton} onPress={() => navigation.navigate('Payment', {item})}>
           <Text style={styles.reserveText}>Reserve</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-
+ 
+ 
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
@@ -236,6 +236,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 8,
     marginTop: 20,
+    marginBottom:30
   },
   messageButtonText: {
     color: "#FFFFFF",
@@ -243,6 +244,6 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 });
-
-
+ 
+ 
 export default DetailsScreen;
