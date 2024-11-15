@@ -17,6 +17,7 @@ import SavedScreen from "./screens/SavedScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import MyListingsScreen from "./screens/MyListingsScreen";
 import EditListing from "./screens/EditListing";
+import CheckoutScreen from "./screens/CheckoutScreen";
 
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -131,6 +132,11 @@ const StackNavigator = () => {
           options={{ title: "Receipt" }}
         />
         <Stack.Screen
+          name="CheckoutScreen"
+          component={CheckoutScreen}
+          options={{ title: "Pay" }}
+        />
+        <Stack.Screen
           name="MyListings"
           component={MyListingsScreen}
           options={{ headerShown: true }}
@@ -139,6 +145,7 @@ const StackNavigator = () => {
         component={EditListing} 
         options={{ headerShown: true }}
         />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

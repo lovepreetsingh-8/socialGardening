@@ -110,19 +110,6 @@ const LoginScreen = () => {
         <Pressable onPress={handleForgotPassword} style={styles.forgotPasswordContainer}>
           <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
         </Pressable>
-
-        {/* Divider */}
-        <View style={styles.dividerContainer}>
-          <View style={styles.divider} />
-          <Text style={styles.orText}>or</Text>
-          <View style={styles.divider} />
-        </View>
-
-        
-        {/*<Pressable onPress={handleGoogleSignIn} style={styles.googleButton}>
-          <Ionicons name="logo-google" size={24} color="black" />
-          <Text style={styles.googleButtonText}>Continue with Google</Text>
-        </Pressable>*/}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

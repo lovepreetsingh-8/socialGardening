@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
   View,
+  Text,
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
@@ -22,12 +23,11 @@ const ExploreHeader = () => {
           >
             <Ionicons name="chatbubble-outline" size={24} color="#4CAF50" />
           </TouchableOpacity>
-
+          <Text style={styles.social}>SocialGarden</Text>
           {/* Create Listing Icon */}
           <TouchableOpacity
             style={styles.iconBtn}
-            onPress={() => navigation.navigate('CreateListing')} // Navigate to CreateListing
-
+            onPress={() => navigation.navigate("CreateListing")} // Navigate to CreateListing
           >
             <Ionicons name="create" size={24} color="#4CAF50" />
           </TouchableOpacity>
@@ -52,6 +52,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 20,
   },
+  social: {
+    fontWeight: "bold",
+    color: "#4CAF50",
+    marginTop: 4,
+    fontSize: 28,
+  },
   actionRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -72,5 +78,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
 export default ExploreHeader;
