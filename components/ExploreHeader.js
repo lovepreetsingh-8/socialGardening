@@ -23,7 +23,7 @@ const ExploreHeader = () => {
           >
             <Ionicons name="chatbubble-outline" size={24} color="#4CAF50" />
           </TouchableOpacity>
-          <Text style={styles.social}>SocialGarden</Text>
+          <Text style={styles.social}>SocialGardening</Text>
           {/* Create Listing Icon */}
           <TouchableOpacity
             style={styles.iconBtn}
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#4CAF50",
     marginTop: 4,
-    fontSize: 28,
+    fontSize: 24,
   },
   actionRow: {
     flexDirection: "row",

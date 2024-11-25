@@ -70,7 +70,7 @@ const PaymentScreen = ({ route }) => {
  
           <View style={styles.priceContainer}>
             <Text style={styles.priceLabel}>Price per Month:</Text>
-            <Text style={styles.priceValue}>€{item.price}</Text>
+            <Text style={styles.priceValue}>${item.price}</Text>
           </View>
  
           <View style={styles.inputContainer}>
@@ -85,7 +85,7 @@ const PaymentScreen = ({ route }) => {
  
           <View style={styles.totalContainer}>
             <Text style={styles.totalLabel}>Total Cost:</Text>
-            <Text style={styles.totalValue}>€{total}</Text>
+            <Text style={styles.totalValue}>${total}</Text>
           </View>
  
      
@@ -334,7 +334,7 @@ export default PaymentScreen;
  
 //           <View style={styles.priceContainer}>
 //             <Text style={styles.priceLabel}>Price per Month:</Text>
-//             <Text style={styles.priceValue}>€{item.price}</Text>
+//             <Text style={styles.priceValue}>${item.price}</Text>
 //           </View>
  
 //           <View style={styles.inputContainer}>
@@ -350,7 +350,7 @@ export default PaymentScreen;
  
 //           <View style={styles.totalContainer}>
 //             <Text style={styles.totalLabel}>Total Cost:</Text>
-//             <Text style={styles.totalValue}>€{total}</Text>
+//             <Text style={styles.totalValue}>${total}</Text>
 //           </View>
  
 //           <TouchableOpacity

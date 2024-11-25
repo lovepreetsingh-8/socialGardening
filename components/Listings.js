@@ -72,9 +72,8 @@ const Listings = () => {
             <Text style={styles.listingName}>{item.name}</Text>
             <Text style={styles.roomType}>{item.location}</Text>
           </View>
-
           <View style={styles.priceContainer}>
-            <Text style={styles.price}>€{item.price}</Text>
+            <Text style={styles.price}>${item.price}</Text>
             <Text style={styles.pricePerNight}> / Duration</Text>
           </View>
         </TouchableOpacity>

@@ -4,8 +4,7 @@ import { useStripe } from "@stripe/stripe-react-native";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
  
-const API_URL = "http://10.243.70.221:8081";
- 
+const API_URL = "http://10.243.7.152:8081";
 export default function CheckoutScreen({ route }) {
   const { totalCost, itemName } = route.params;
   const { initPaymentSheet, presentPaymentSheet } = useStripe();

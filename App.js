@@ -8,7 +8,7 @@ export default function App() {
  
   const fetchPublishableKey = async () => {
     try {
-      const response = await fetch('http://10.243.70.221:8081/config'); // Replace with your backend URL
+      const response = await fetch('http://10.243.7.152:8081/config'); // Replace with your backend URL
       const data = await response.json();
       console.log('Publishable Key:', data.publishableKey); // Log to verify
       setPublishableKey(data.publishableKey);
@@ -22,10 +22,12 @@ export default function App() {
     fetchPublishableKey();
   }, []);
  
-  if (!publishableKey) {
-    // Display a loading indicator while fetching the publishable key
-    return <ActivityIndicator size="large" color="#0000ff"  />;
-  }
+
+  
+  // if (!publishableKey) {
+  //   // Display a loading indicator while fetching the publishable key
+  //   return <ActivityIndicator size="large" color="#0000ff"  />;
+  // }
  
   return (
     <StripeProvider publishableKey={publishableKey}>

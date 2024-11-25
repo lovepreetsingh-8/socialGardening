@@ -61,7 +61,7 @@ const MyListingsScreen = () => {
               <View style={styles.details}>
                 <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.location}>{item.location}</Text>
-                <Text style={styles.price}>€{item.price} / Duration</Text>
+                <Text style={styles.price}>${item.price} / Duration</Text>
               </View>
             </TouchableOpacity>
             <View style={styles.actions}>

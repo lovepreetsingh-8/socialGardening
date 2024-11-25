@@ -56,7 +56,7 @@ const SavedScreen = () => {
                 <Text style={styles.listingName}>{item.name}</Text>
                 <Text style={styles.roomType}>{item.room_type}</Text>
                 <View style={styles.priceContainer}>
-                  <Text style={styles.price}>€ {item.price} / night</Text>
+                  <Text style={styles.price}>$ {item.price} / night</Text>
                 </View>
               </View>
             </TouchableOpacity>
