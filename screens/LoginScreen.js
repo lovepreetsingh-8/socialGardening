@@ -12,16 +12,22 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const login = () => {
+    if (!email || !password) {
+      Alert.alert("Warning", "Please fill in all fields before continuing.");
+      return;
+    }
+  
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log("User details", user);
       })
       .catch((error) => {
-        console.log("Error logging in", error);
-        Alert.alert("Login Error", error.message);
+        console.log("Check Credentials for login");
+        Alert.alert("Email or password is wrong. Please try again");
       });
   };
+  
 
   const handleForgotPassword = () => {
     if (!email) {
@@ -30,7 +36,7 @@ const LoginScreen = () => {
     }
     resetPassword(email)
       .then((message) => Alert.alert("Success", message))
-      .catch((error) => Alert.alert("Error", error.message));
+      .catch((error) => Alert.alert("Please enter correct email."));
   };
 
   const handleGoogleSignIn = async () => {

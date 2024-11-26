@@ -1,57 +1,68 @@
-import { useNavigation } from '@react-navigation/native';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-import React, { useState } from 'react';
+import { useNavigation } from "@react-navigation/native";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
 import {
-  Alert,
   KeyboardAvoidingView,
   Pressable,
   SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
-  View
-} from 'react-native';
-import { auth, db } from '../firebase';
+  View,
+} from "react-native";
+import { auth, db } from "../firebase";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [emailWarning, setEmailWarning] = useState("");
+  const [formWarning, setFormWarning] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const navigation = useNavigation();
 
-  const register = () => {
-    if (email === "" || password === "" || phone === "") {
-      Alert.alert(
-        "Invalid Details",
-        "Please enter all the credentials",
-        [
-          {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          },
-          { text: "OK", onPress: () => console.log("OK Pressed") }
-        ],
-        { cancelable: false }
-      );
-      return;
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  useEffect(() => {
+    if (email === "" || password === "" || phone === "" || !validateEmail(email)) {
+      setIsButtonDisabled(true);
+      if (!validateEmail(email) && email !== "") {
+        setEmailWarning("Please enter a valid email address.");
+      } else {
+        setEmailWarning("");
+      }
+      if (email === "" || password === "" || phone === "") {
+        setFormWarning("All fields are required.");
+      } else {
+        setFormWarning("");
+      }
+    } else {
+      setIsButtonDisabled(false);
+      setEmailWarning("");
+      setFormWarning("");
     }
+  }, [email, password, phone]);
 
-    createUserWithEmailAndPassword(auth, email, password).then((userCredentials) => {
-      const user = userCredentials.user.email;
-      const uid = userCredentials.user.uid;
+  const register = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user.email;
+        const uid = userCredentials.user.uid;
 
-      setDoc(doc(db, "users", `${uid}`), {
-        email: user,
-        phone: phone
+        setDoc(doc(db, "users", `${uid}`), {
+          email: user,
+          phone: phone,
+        });
+
+        navigation.navigate("Main"); // Navigate to the main screen upon successful registration
+      })
+      .catch((error) => {
+        console.log("Error during registration:", error.message);
       });
-
-      // Optionally navigate to login or main screen after successful registration
-      navigation.navigate('Main');
-    }).catch(error => {
-      Alert.alert("Registration Error", error.message);
-    });
   };
 
   return (
@@ -71,6 +82,7 @@ const RegisterScreen = () => {
             placeholderTextColor={"#999"}
             style={styles.input}
           />
+          {emailWarning ? <Text style={styles.warningText}>{emailWarning}</Text> : null}
         </View>
 
         <View style={styles.inputContainer}>
@@ -96,12 +108,26 @@ const RegisterScreen = () => {
           />
         </View>
 
-        <Pressable onPress={register} style={styles.registerButton}>
+        {formWarning ? <Text style={styles.warningText}>{formWarning}</Text> : null}
+
+        <Pressable
+          onPress={register}
+          style={[
+            styles.registerButton,
+            { backgroundColor: isButtonDisabled ? "#9E9E9E" : "#388E3C" },
+          ]}
+          disabled={isButtonDisabled}
+        >
           <Text style={styles.registerButtonText}>Register</Text>
         </Pressable>
 
-        <Pressable onPress={() => navigation.goBack()} style={styles.signInTextContainer}>
-          <Text style={styles.signInText}>Already have an account? <Text style={styles.signInLink}>Sign In</Text></Text>
+        <Pressable
+          onPress={() => navigation.goBack()}
+          style={styles.signInTextContainer}
+        >
+          <Text style={styles.signInText}>
+            Already have an account? <Text style={styles.signInLink}>Sign In</Text>
+          </Text>
         </Pressable>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -120,7 +146,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     justifyContent: "center",
-    width: '100%',
+    width: "100%",
   },
   headerContainer: {
     justifyContent: "center",
@@ -140,7 +166,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginVertical: 10,
-    width: '100%',
+    width: "100%",
   },
   label: {
     fontSize: 16,
@@ -155,9 +181,13 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     color: "#388E3C",
   },
+  warningText: {
+    color: "#D32F2F",
+    fontSize: 12,
+    marginTop: 5,
+  },
   registerButton: {
     width: "100%",
-    backgroundColor: "#388E3C",
     padding: 15,
     borderRadius: 8,
     marginTop: 20,

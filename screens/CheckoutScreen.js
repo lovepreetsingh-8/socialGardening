@@ -3,13 +3,14 @@ import { View, Alert, Button } from 'react-native';
 import { useStripe } from "@stripe/stripe-react-native";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
- 
-const API_URL = "http://10.243.7.152:8081";
+import { useNavigation } from "@react-navigation/native";
+
+const API_URL = "http://10.243.14.134:8081";
 export default function CheckoutScreen({ route }) {
   const { totalCost, itemName } = route.params;
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
- 
+  const navigation = useNavigation();
   const fetchPaymentSheetParams = async () => {
     console.log('Total Cost:', totalCost); // Debug value
  
@@ -86,8 +87,11 @@ export default function CheckoutScreen({ route }) {
  
     if (error) {
       Alert.alert(`Error code: ${error.code}`, error.message);
+
     } else {
       Alert.alert('Success', 'Your order is confirmed!');
+      navigation.navigate('Main');
+
     }
   };
  
