@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "booking-project2",
-    "slug": "booking-project2",
+    "name": "SocialGardening",
+    "slug": "socialgarden-yopaiz2pwrr-unhchxpn",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -33,6 +33,15 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "c30327a3-09b1-4936-a493-ace063c90104"
+      }
+    },
+    "owner": "jashansran2581"
   }
 }
