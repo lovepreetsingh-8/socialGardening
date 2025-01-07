@@ -8,7 +8,7 @@ export default function App() {
  
   const fetchPublishableKey = async () => {
     try {
-      const response = await fetch('http://10.243.14.134:8081/config'); // Replace with your backend URL
+      const response = await fetch('http://10.245.67.16:8082/config'); // Replace with your backend URL
       const data = await response.json();
       console.log('Publishable Key:', data.publishableKey); // Log to verify
       setPublishableKey(data.publishableKey);

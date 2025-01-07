@@ -18,6 +18,8 @@ import PaymentScreen from "./screens/PaymentScreen";
 import MyListingsScreen from "./screens/MyListingsScreen";
 import EditListing from "./screens/EditListing";
 import CheckoutScreen from "./screens/CheckoutScreen";
+import SuccessfulPayment from "./screens/SuccessfulPayment";
+import PaymentHistory from "./screens/PaymentHistory";
 
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -136,6 +138,7 @@ const StackNavigator = () => {
           component={CheckoutScreen}
           options={{ title: "Pay" }}
         />
+        
         <Stack.Screen
           name="MyListings"
           component={MyListingsScreen}
@@ -144,6 +147,17 @@ const StackNavigator = () => {
         <Stack.Screen name="EditListing" 
         component={EditListing} 
         options={{ headerShown: true }}
+        />
+        <Stack.Screen 
+          name="SuccessPayment" 
+          component={SuccessfulPayment} 
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="PaymentSuccess"
+          component={PaymentHistory}
+          options={{ title: "Lease property" }}
         />
         
       </Stack.Navigator>

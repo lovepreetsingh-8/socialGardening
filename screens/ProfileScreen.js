@@ -267,6 +267,17 @@ const ProfileScreen = () => {
               </Pressable>
 
               <Pressable
+                onPress={() => navigation.navigate("PaymentSuccess")
+                  
+                }
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>
+                  Payment History
+                </Text>
+              </Pressable>
+
+              <Pressable
                 onPress={() => navigation.navigate("MyListings")}
                 style={styles.button}
               >
@@ -369,3 +380,4 @@ const styles = StyleSheet.create({
   },
 });
 export default ProfileScreen;
+

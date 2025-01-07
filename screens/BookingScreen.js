@@ -1,3 +1,5 @@
+
+
 import { useNavigation } from '@react-navigation/core';
 import * as Location from 'expo-location';
 import { collection, getDocs, query, where } from 'firebase/firestore';

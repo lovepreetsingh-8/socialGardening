@@ -42,8 +42,9 @@ const PaymentScreen = ({ route }) => {
     setLoading(true);
     try {
       navigation.navigate('CheckoutScreen', {
+
         totalCost: total,  
-        itemName: item.name
+        item
        });
     } catch (error) {
       console.error('Navigation error:', error);
@@ -51,13 +52,13 @@ const PaymentScreen = ({ route }) => {
     }
   };
  
-  if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#2D572C" />
-      </View>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <View style={styles.loadingContainer}>
+  //       <ActivityIndicator size="large" color="#2D572C" />
+  //     </View>
+  //   );
+  // }
  
   return (
     <View style={styles.screenContainer}>
@@ -213,7 +214,7 @@ export default PaymentScreen;
 // import { addDoc, collection, Timestamp } from "firebase/firestore";
 // import { db } from "../firebase";
  
-// const API_URL = "http://10.0.0.92:8081";
+// const API_URL = "http://10.0.0.92:";
  
 // const PaymentScreen = ({ route }) => {
 //   const { item } = route.params;
