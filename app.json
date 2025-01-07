@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "SocialGardening",
-    "slug": "socialgarden-yopaiz2pwrr-unhchxpn",
+    "slug": "socialgardening",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -39,9 +39,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "c30327a3-09b1-4936-a493-ace063c90104"
+        "projectId": "74f74fa2-57e3-4280-897a-0f7920a17345"
       }
     },
-    "owner": "jashansran2581"
+    "owner": "lovepreet00001"
   }
 }
