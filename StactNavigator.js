@@ -133,11 +133,11 @@ const StackNavigator = () => {
           component={PaymentScreen}
           options={{ title: "Receipt" }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="CheckoutScreen"
           component={CheckoutScreen}
           options={{ title: "Pay" }}
-        />
+        /> */}
         
         <Stack.Screen
           name="MyListings"
@@ -148,7 +148,7 @@ const StackNavigator = () => {
         component={EditListing} 
         options={{ headerShown: true }}
         />
-        <Stack.Screen 
+        {/* <Stack.Screen 
           name="SuccessPayment" 
           component={SuccessfulPayment} 
           options={{ headerShown: false }}
@@ -158,7 +158,7 @@ const StackNavigator = () => {
           name="PaymentSuccess"
           component={PaymentHistory}
           options={{ title: "Lease property" }}
-        />
+        /> */}
         
       </Stack.Navigator>
     </NavigationContainer>
